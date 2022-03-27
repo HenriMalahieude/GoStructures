@@ -66,10 +66,27 @@ func (b *BinaryTree[T]) Remove(value T, equal func(T, T) bool){
 	}
 
 	//Locate the replacement
+	var par *BinaryNode[T] = removeNode
 	var replacement *BinaryNode[T] = removeNode
 	if replacement.right == nil {
-		
+		replacement = replacement.left
+		for replacement != nil && replacement.right != nil {
+			par = replacement
+			replacement = replacement.right
+		}
+		removeNode.value = replacement.value
+		par.right = nil
+
+		return
 	}
+
+	replacement = replacement.right
+	for replacement != nil && replacement.left != nil {
+		par = replacement
+		replacement = replacement.left
+	}
+	removeNode.value = replacement.value
+	par.left = nil
 }
 
 //InorderPrint Outputs the tree in order of seeing each node
