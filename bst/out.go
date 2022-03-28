@@ -7,7 +7,7 @@ func (b BinaryTree[T]) InorderPrint(){
 	recurseInOrder(b.root)
 }
 
-func recurseInOrder[T any](node *BinaryNode[T]){
+func recurseInOrder[T any](node *binaryNode[T]){
 	if node == nil {return}
 
 	recurseInOrder(node.left)
@@ -20,7 +20,7 @@ func (b BinaryTree[T]) PreorderPrint(){
 	recursePreOrder(b.root)
 }
 
-func recursePreOrder[T any](node *BinaryNode[T]){
+func recursePreOrder[T any](node *binaryNode[T]){
 	if node == nil {return}
 
 	fmt.Printf("%v ", node.value)
@@ -33,7 +33,7 @@ func (b BinaryTree[T]) PostorderPrint(){
 	recursePostOrder(b.root)
 }
 
-func recursePostOrder[T any](node *BinaryNode[T]){
+func recursePostOrder[T any](node *binaryNode[T]){
 	if node == nil {return}
 
 	recursePostOrder(node.left)

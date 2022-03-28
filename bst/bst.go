@@ -1,20 +1,20 @@
 package bst
 
-//BinaryNode Simple value as defined by user with two children
-type BinaryNode[T any] struct {
+//binaryNode Simple value as defined by user with two children
+type binaryNode[T any] struct {
 	value T
-	left, right  *BinaryNode[T]
+	left, right  *binaryNode[T]
 }
 
 //BinaryTree Simple Binary Tree, can define the comparator function (must be true for right value)
 type BinaryTree[T any] struct {
 	comparator func(T, T) bool
-	root *BinaryNode[T]
+	root *binaryNode[T]
 }
 
 //NewBinarySearchTree Creates a new Binary Search tree
 func NewBinarySearchTree[T any](startValue T, compareFunction func(T, T) bool) *BinaryTree[T] {
-	nRootNode := new(BinaryNode[T])
+	nRootNode := new(binaryNode[T])
 	nRootNode.value = startValue
 	
 	return &BinaryTree[T]{
@@ -25,7 +25,7 @@ func NewBinarySearchTree[T any](startValue T, compareFunction func(T, T) bool) *
 
 //Insert Inserts a new value into the tree, using the comparator function saved in the struct
 func (b *BinaryTree[T]) Insert(value T){
-	var insertAfter *BinaryNode[T] = b.root
+	var insertAfter *binaryNode[T] = b.root
 	for insertAfter != nil {
 		if b.comparator(value, insertAfter.value) { //if true, go to the right
 			if insertAfter.right == nil {
@@ -41,10 +41,10 @@ func (b *BinaryTree[T]) Insert(value T){
 	}
 
 	if b.comparator(value, insertAfter.value) {
-		insertAfter.right = new(BinaryNode[T])
+		insertAfter.right = new(binaryNode[T])
 		insertAfter.right.value = value
 	}else{
-		insertAfter.left = new(BinaryNode[T])
+		insertAfter.left = new(binaryNode[T])
 		insertAfter.left.value = value
 	}
 }
@@ -52,7 +52,7 @@ func (b *BinaryTree[T]) Insert(value T){
 //Remove the value from location, and replace with best replacement
 func (b *BinaryTree[T]) Remove(value T, equal func(T, T) bool){
 	//Locate the node we want to remove
-	var removeNode *BinaryNode[T] = b.root
+	var removeNode *binaryNode[T] = b.root
 	for removeNode != nil {
 		if equal(value, removeNode.value) { //if true, go to the right
 			removeNode = removeNode.right
@@ -62,8 +62,8 @@ func (b *BinaryTree[T]) Remove(value T, equal func(T, T) bool){
 	}
 
 	//Locate the replacement
-	var par *BinaryNode[T] = removeNode
-	var replacement *BinaryNode[T] = removeNode
+	var par *binaryNode[T] = removeNode
+	var replacement *binaryNode[T] = removeNode
 	if replacement.right == nil {
 		replacement = replacement.left
 		for replacement != nil && replacement.right != nil {
