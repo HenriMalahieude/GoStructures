@@ -1,8 +1,4 @@
-package binarysearchtree
-
-import (
-	"fmt"
-)
+package bst
 
 //BinaryNode Simple value as defined by user with two children
 type BinaryNode[T any] struct {
@@ -87,43 +83,4 @@ func (b *BinaryTree[T]) Remove(value T, equal func(T, T) bool){
 	}
 	removeNode.value = replacement.value
 	par.left = nil
-}
-
-//InorderPrint Outputs the tree in order of seeing each node
-func (b BinaryTree[T]) InorderPrint(){
-	recurseInOrder(b.root)
-}
-
-func recurseInOrder[T any](node *BinaryNode[T]){
-	if node == nil {return}
-
-	recurseInOrder(node.left)
-	fmt.Printf("%v ", node.value)
-	recurseInOrder(node.right)
-}
-
-//PreorderPrint Outputs the tree with the root node coming first
-func (b BinaryTree[T]) PreorderPrint(){
-	recursePreOrder(b.root)
-}
-
-func recursePreOrder[T any](node *BinaryNode[T]){
-	if node == nil {return}
-
-	fmt.Printf("%v ", node.value)
-	recurseInOrder(node.left)
-	recurseInOrder(node.right)
-}
-
-//PostorderPrint Outputs the tree with the root node coming last
-func (b BinaryTree[T]) PostorderPrint(){
-	recursePostOrder(b.root)
-}
-
-func recursePostOrder[T any](node *BinaryNode[T]){
-	if node == nil {return}
-
-	fmt.Printf("%v ", node.value)
-	recurseInOrder(node.left)
-	recurseInOrder(node.right)
 }
