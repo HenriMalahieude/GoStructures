@@ -7,8 +7,12 @@ import (
 )
 
 func main() {
-	bt1 := bst.NewBinarySearchTree(5, func(a, b int) bool {
+	bt1 := bst.NewBinarySearchTree(5, 
+	func(a, b int) bool {
 		return a > b
+	}, 
+	func (a, b int) bool {
+		return a == b
 	})
 
 	bt1.Insert(3)
@@ -21,8 +25,6 @@ func main() {
 
 	bt1.InorderPrint()
 	fmt.Println()
-	bt1.PreorderPrint()
-	fmt.Println()
-	bt1.PostorderPrint()
-	fmt.Println()
+
+	bt1.VisualizeDotty("bt")
 }

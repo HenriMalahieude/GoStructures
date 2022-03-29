@@ -4,24 +4,28 @@ package bst
 type binaryNode[T any] struct {
 	value T
 	left, right  *binaryNode[T]
-	ID int
+	id int
+	//name string
 }
 
 //BinaryTree Simple Binary Tree, can define the comparator function (must be true for right value)
-type BinaryTree[T comparable] struct {
+type BinaryTree[T any] struct {
 	comparator func(T, T) bool
+	equalizer func(T, T) bool
 	root *binaryNode[T]
 	nextID int
 }
 
 //NewBinarySearchTree Creates a new Binary Search tree
-func NewBinarySearchTree[T comparable](startValue T, compareFunction func(T, T) bool) *BinaryTree[T] {
+func NewBinarySearchTree[T any](startValue T, compareFunction, equals func(T, T) bool) *BinaryTree[T] {
 	nRootNode := new(binaryNode[T])
 	nRootNode.value = startValue
-	nRootNode.ID = 0
-	
+	nRootNode.id = 0
+	//nRootNode.name =  "root"
+
 	return &BinaryTree[T]{
 		comparator: compareFunction,
+		equalizer: equals,
 		root: nRootNode,
 		nextID: 1,
 	}
@@ -47,12 +51,14 @@ func (b *BinaryTree[T]) Insert(value T){
 	if b.comparator(value, insertAfter.value) {
 		insertAfter.right = new(binaryNode[T])
 		insertAfter.right.value = value
-		insertAfter.right.ID = b.nextID
+		insertAfter.right.id = b.nextID
+		//insertAfter.right.name = name
 		b.nextID++
 	}else{
 		insertAfter.left = new(binaryNode[T])
 		insertAfter.left.value = value
-		insertAfter.left.ID = b.nextID
+		insertAfter.left.id = b.nextID
+		//insertAfter.left.name = name
 		b.nextID++
 	}
 }
@@ -62,7 +68,7 @@ func (b *BinaryTree[T]) Remove(value T,){
 	//Locate the node we want to remove
 	var removeNode *binaryNode[T] = b.root
 	for removeNode != nil {
-		if value == removeNode.value { //if true, go to the right
+		if b.equalizer(value, removeNode.value) { //if true, go to the right
 			removeNode = removeNode.right
 		}else{
 			removeNode = removeNode.left
