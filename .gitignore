@@ -1,3 +1,6 @@
 #All Dotty files
 *.dot
 *.jpg
+
+#VSC Specific
+launch.json
