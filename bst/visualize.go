@@ -1,6 +1,7 @@
 package bst
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"os/exec"
@@ -10,9 +11,8 @@ import (
 func (b BinaryTree[T]) VisualizeDotty(fileName string) {
 	file, err := os.Create(fileName + ".dot")
 
-	defer file.Close()
-
 	if err == nil {
+		defer file.Close()
 
 		_, err2 := file.WriteString("digraph BinarySearchTree{\n")
 		if err2 != nil {fmt.Println(err2); return }
@@ -22,11 +22,12 @@ func (b BinaryTree[T]) VisualizeDotty(fileName string) {
 		_, err3 := file.WriteString("}")
 		if err3 != nil {fmt.Println(err3); return}
 
-		out, err4 := exec.Command("dot", "-Tjpg ./" + fileName + ".dot -o " + fileName + ".jpg").Output()
+		cmd := exec.Command("dot", "-Tjpg", "./" + fileName + ".dot", "-o", fileName + ".jpg")
+		var stderr bytes.Buffer
+		cmd.Stderr = &stderr
+		err4 := cmd.Run()
 		if err4 != nil {
-			
-			output := string(out[:])
-			fmt.Println("Dot Error:", output, ";", err4)
+			fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
 		}
 
 		return
