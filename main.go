@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/HenriMalahieude/bst"
+	"github.com/HenriMalahieude/GoStructures/bst"
 )
 
 func main() {
@@ -23,8 +21,10 @@ func main() {
 	bt1.Insert(6)
 	bt1.Insert(8)
 
-	bt1.InorderPrint()
-	fmt.Println()
+	bt1.Remove(7)
+
+	//bt1.InorderPrint()
+	//fmt.Println()
 
 	bt1.VisualizeDotty("bt")
 }
