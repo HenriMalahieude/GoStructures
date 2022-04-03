@@ -79,3 +79,17 @@ func (l *SinglyLinkedList[T]) Insert(pos int, value T){
 		insertAfter.next = newNode
 	}
 }
+
+//Search searches the list and returns the first entry which satisfies the function provided, nil otherwise
+func (l *SinglyLinkedList[T]) Search(lambda func(T) bool) *SingleNode[T]{
+	var curNode *SingleNode[T] = l.head;
+	for curNode != nil && curNode.next != nil{
+		if lambda(curNode.entry) {
+			return curNode
+		}
+
+		curNode = curNode.next
+	}
+
+	return nil
+}

@@ -2,11 +2,11 @@ package list
 
 //LinkedList represents the different types of lists we can have
 type LinkedList[T any] interface {
-	PushFront(value T)
-	PushBack(value T)
+	PushFront(T)
+	PushBack(T)
 	Insert(pos int, value T)
-	Remove(value T)
-	Search(value T)
+	Remove(T)
+	Search(func(T) bool) any
 }
 
 //SingleNode is a node for a singly linked list
