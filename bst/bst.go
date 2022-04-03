@@ -1,7 +1,5 @@
 package bst
 
-import "fmt"
-
 //NewBinarySearchTree Creates an empty Binary Search tree
 func NewBinarySearchTree[T any](compareFunction, equals func(T, T) bool) *BinaryTree[T] {
 	return &BinaryTree[T]{
@@ -72,7 +70,7 @@ func (b *BinaryTree[T]) Remove(value T){
 		}
 	}
 
-	fmt.Println(remNode.value, remPar.value)
+	//fmt.Println(remNode.value, remPar.value)
 
 	//Locate the replacement, and replace
 	var repPar *BinaryNode[T] = remPar //replacement parent
@@ -80,7 +78,7 @@ func (b *BinaryTree[T]) Remove(value T){
 	var repSide bool = remSide //the side it's on
 
 	if repNode.right == nil { //right child doesn't exist
-		fmt.Println("Looking for replacement on left side")
+		//fmt.Println("Looking for replacement on left side")
 		repPar = repNode
 		repNode = repNode.left
 			
@@ -92,7 +90,7 @@ func (b *BinaryTree[T]) Remove(value T){
 			repSide = true
 		}
 	}else { //left child doesn't exist
-		fmt.Println("Looking for replacement on right side")
+		//fmt.Println("Looking for replacement on right side")
 		repPar = repNode
 		repNode = repNode.right
 
