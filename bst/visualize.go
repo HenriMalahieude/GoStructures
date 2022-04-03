@@ -43,14 +43,14 @@ func recurseWrite[T any](file *os.File, node *binaryNode[T]){
 	_, err1 := file.WriteString(fmt.Sprint(node.id) + " [label=\"" + fmt.Sprintf("%v", node.value) + "\"]\n")
 	if err1 != nil { fmt.Println(err1); return}
 
-	if node.right != nil {
+	if node.right != nil && node.right != node {
 		_, err2 := file.WriteString(fmt.Sprint(node.id) + " -> " + fmt.Sprint(node.right.id) + "\n")
 		if err2 != nil { fmt.Println(err1); return}
 
 		recurseWrite(file, node.right)
 	}
 
-	if node.left != nil {
+	if node.left != nil && node.left != node {
 		_, err3 := file.WriteString(fmt.Sprint(node.id) + " -> " + fmt.Sprint(node.left.id) + "\n")
 		if err3 != nil { fmt.Println(err1); return}
 
