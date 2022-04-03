@@ -1,0 +1,66 @@
+package list
+
+//NewSinglyLinkedList returns a new singly linked list
+func NewSinglyLinkedList[T any]() *SinglyLinkedList[T]{
+	list := &SinglyLinkedList[T]{
+		nil,
+		nil,
+	}
+
+	return list
+}
+
+func (l *SinglyLinkedList[T]) insertionSpecialCase(value T) bool{
+	if (l.head == nil){ //special case of empty
+		l.head = &SingleNode[T]{
+			value,
+			nil,
+		}
+		l.tail = l.head
+		
+		return true
+	}
+
+	return false
+}
+
+//PushFront pushes the value at the front/head of the list
+func (l *SinglyLinkedList[T]) PushFront(value T){
+	if (l.insertionSpecialCase(value)){
+		return
+	}
+
+	newNode := &SingleNode[T]{
+		value,
+		l.head, //I think this works? Right?
+	}
+
+	l.head = newNode
+}
+
+//PushBack pushes the value at the back/tail of the list
+func (l *SinglyLinkedList[T]) PushBack(value T){
+	if (l.insertionSpecialCase(value)){
+		return
+	}
+
+	newNode := &SingleNode[T]{
+		value,
+		nil, //I think this works? Right?
+	}
+
+	l.tail.next = newNode
+	l.tail = newNode
+}
+
+//Insert inserts the value into the list at position specified (or at end of list of too far)
+func (l *SinglyLinkedList[T]) Insert(pos int, value T){
+	if (l.insertionSpecialCase(value)){
+		return
+	}
+
+	var insertAfter *SingleNode[T] = l.head;
+	for insertAfter != nil && insertAfter.next != nil{
+		
+	}
+}
