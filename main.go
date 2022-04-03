@@ -15,15 +15,17 @@ func main() {
 
 	bt1.Insert(3)
 	bt1.Insert(4)
+	bt1.Insert(1)
 	bt1.Insert(2)
+	bt1.Insert(0)
 
 	bt1.Insert(7)
 	bt1.Insert(6)
 	bt1.Insert(8)
 
-	bt1.Remove(7)
+	bt1.Remove(3)
 
-	//bt1.InorderPrint()
+	bt1.InorderPrint()
 	//fmt.Println()
 
 	bt1.VisualizeDotty("bt")
