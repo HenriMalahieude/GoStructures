@@ -2,7 +2,7 @@ package bst
 
 import "fmt"
 
-//NewBinarySearchTree Creates a new Binary Search tree
+//NewBinarySearchTree Creates an empty Binary Search tree
 func NewBinarySearchTree[T any](compareFunction, equals func(T, T) bool) *BinaryTree[T] {
 	return &BinaryTree[T]{
 		comparator: compareFunction,
@@ -81,6 +81,7 @@ func (b *BinaryTree[T]) Remove(value T){
 
 	if repNode.right == nil { //right child doesn't exist
 		fmt.Println("Looking for replacement on left side")
+		repPar = repNode
 		repNode = repNode.left
 			
 		repSide = false
@@ -92,6 +93,7 @@ func (b *BinaryTree[T]) Remove(value T){
 		}
 	}else { //left child doesn't exist
 		fmt.Println("Looking for replacement on right side")
+		repPar = repNode
 		repNode = repNode.right
 
 		repSide = true
@@ -103,12 +105,12 @@ func (b *BinaryTree[T]) Remove(value T){
 		}
 	}
 
-	fmt.Println("Remove Node: " + fmt.Sprintf("%v", remNode.value))
+	/*fmt.Println("Remove Node: " + fmt.Sprintf("%v", remNode.value))
 	fmt.Println("Replacement Node: " + fmt.Sprintf("%v", repNode.value))
 	fmt.Println(remPar.value, remPar.left.value, remPar.right.value)
 	fmt.Println(remNode.value, remNode.left == nil, remNode.right == nil)
 	fmt.Println(repPar.value, repPar.left.value, repPar.right.value)
-	fmt.Println(repNode.value, repNode.left == nil, repNode.right == nil)
+	fmt.Println(repNode.value, repNode.left == nil, repNode.right == nil)*/
 	
 	//We have found the replacement and now will switch em out
 	if (repNode.right != nil || repNode.left != nil){
