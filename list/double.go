@@ -78,3 +78,40 @@ func (d *DoublyLinkedList[T]) Insert(pos int, value T){
 		insertAfter.next = newNode
 	}
 }
+
+func (d *DoublyLinkedList[T]) Remove(lambda func(T) bool) {
+	if d.head == nil{return}
+
+	curNode := d.head
+	for curNode != nil && curNode.next != nil {
+		if lambda(curNode.entry) {
+			break;
+		}
+		curNode = curNode.next
+	}
+
+	if (curNode == nil){ //the 
+		return
+	}else if (curNode == d.head){
+		d.head = curNode.next
+		d.head.back = nil
+	}else if (curNode == d.tail){
+		d.tail = curNode.back
+		d.tail.next = nil
+	}else{
+		curNode.back.next = curNode.next
+	}
+}
+
+func (d *DoublyLinkedList[T]) Search(lambda func(T) bool) any {
+	var curNode *DoubleNode[T] = d.head;
+	for curNode != nil && curNode.next != nil{
+		if lambda(curNode.entry) {
+			return curNode
+		}
+
+		curNode = curNode.next
+	}
+
+	return nil
+}
