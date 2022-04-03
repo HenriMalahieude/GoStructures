@@ -1,5 +1,7 @@
 package bst
 
+import "fmt"
+
 //binaryNode Simple value as defined by user with two children
 type binaryNode[T any] struct {
 	value T
@@ -33,6 +35,13 @@ func NewBinarySearchTree[T any](startValue T, compareFunction, equals func(T, T)
 
 //Insert Inserts a new value into the tree, using the comparator function saved in the struct
 func (b *BinaryTree[T]) Insert(value T){
+	if b.root == nil {
+		b.root = new(binaryNode[T])
+		b.root.id = 0
+		b.nextID = 1;
+		return;
+	}
+
 	var insertAfter *binaryNode[T] = b.root
 	for insertAfter != nil {
 		if b.comparator(value, insertAfter.value) { //if true, go to the right
@@ -66,35 +75,82 @@ func (b *BinaryTree[T]) Insert(value T){
 //Remove the value from location, and replace with best replacement
 func (b *BinaryTree[T]) Remove(value T,){
 	//Locate the node we want to remove
-	var removeNode *binaryNode[T] = b.root
-	for removeNode != nil {
-		if b.equalizer(value, removeNode.value) { //if true, go to the right
-			removeNode = removeNode.right
+	var remNode *binaryNode[T] = b.root
+	var remPar *binaryNode[T] = remNode
+	var remSide bool = false //true for right side
+
+	for remNode != nil {
+		if b.equalizer(value, remNode.value) { break }
+
+		remPar = remNode
+		if b.comparator(value, remNode.value) { //if true, go to the right
+			remNode = remNode.right
+			remSide = true;
 		}else{
-			removeNode = removeNode.left
+			remNode = remNode.left
+			remSide = false;
 		}
 	}
 
-	//Locate the replacement
-	var par *binaryNode[T] = removeNode
-	var replacement *binaryNode[T] = removeNode
-	if replacement.right == nil {
-		replacement = replacement.left
-		for replacement != nil && replacement.right != nil {
-			par = replacement
-			replacement = replacement.right
+	fmt.Println(remNode.value, remPar.value)
+
+	//Locate the replacement, and replace
+	var repPar *binaryNode[T] = remPar //replacement parent
+	var repNode *binaryNode[T] = remNode //replacement node
+	var repSide bool = remSide //the side it's on
+
+	if repNode.right == nil { //right child doesn't exist
+		fmt.Println("Looking for replacement on left side")
+		repNode = repNode.left
+			
+		repSide = false
+
+		for repNode != nil && repNode.right != nil {
+			repPar = repNode
+			repNode = repNode.right
+			repSide = true
 		}
-		removeNode.value = replacement.value
-		par.right = nil
+	}else { //left child doesn't exist
+		fmt.Println("Looking for replacement on right side")
+		repNode = repNode.right
 
-		return
+		repSide = true
+
+		for repNode != nil && repNode.left != nil {
+			repPar = repNode
+			repNode = repNode.left
+			repSide = false
+		}
 	}
 
-	replacement = replacement.right
-	for replacement != nil && replacement.left != nil {
-		par = replacement
-		replacement = replacement.left
+	fmt.Println("Remove Node: " + fmt.Sprintf("%v", remNode.value))
+	fmt.Println("Replacement Node: " + fmt.Sprintf("%v", repNode.value))
+	fmt.Println(remPar.value, remPar.left.value, remPar.right.value)
+	fmt.Println(remNode.value, remNode.left == nil, remNode.right == nil)
+	fmt.Println(repPar.value, repPar.left.value, repPar.right.value)
+	fmt.Println(repNode.value, repNode.left == nil, repNode.right == nil)
+	
+	//We have found the replacement and now will switch em out
+	if (repNode.right != nil || repNode.left != nil){
+		b.Remove(repNode.value)
 	}
-	removeNode.value = replacement.value
-	par.left = nil
+	
+	repNode.left = remNode.left
+	repNode.right = remNode.right
+
+	if remSide {
+		remPar.right = repNode
+	}else{
+		remPar.left = repNode
+	}
+
+	//fmt.Println(remPar.left == nil)
+
+	if repNode.left == nil && repNode.right == nil {
+		if repSide {
+			repPar.left = nil
+		}else{
+			repPar.right = nil
+		}
+	}
 }
