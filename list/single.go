@@ -59,8 +59,23 @@ func (l *SinglyLinkedList[T]) Insert(pos int, value T){
 		return
 	}
 
+	var curPos int = 0;
 	var insertAfter *SingleNode[T] = l.head;
-	for insertAfter != nil && insertAfter.next != nil{
-		
+	for insertAfter != nil && insertAfter.next != nil && curPos < pos{
+		insertAfter = insertAfter.next;
+		curPos++;
+	}
+
+	if (insertAfter == l.head){
+		l.PushFront(value)
+	}else if (insertAfter == l.tail){
+		l.PushBack(value)
+	}else{
+		newNode := &SingleNode[T]{
+			value,
+			insertAfter.next,
+		}
+
+		insertAfter.next = newNode
 	}
 }
