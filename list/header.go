@@ -24,7 +24,7 @@ type SinglyLinkedList[T any] struct {
 //DoubleNode is a node for a doubly linked list
 type DoubleNode[T any] struct {
 	entry T
-	back *DoubleNode[T]
+	prev *DoubleNode[T]
 	next *DoubleNode[T]
 }
 
