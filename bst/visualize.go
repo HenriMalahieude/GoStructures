@@ -38,7 +38,7 @@ func (b BinaryTree[T]) VisualizeDotty(fileName string) {
 	//system(command.c_str());
 }
 
-func recurseWrite[T any](file *os.File, node *binaryNode[T]){
+func recurseWrite[T any](file *os.File, node *BinaryNode[T]){
 	
 	_, err1 := file.WriteString(fmt.Sprint(node.id) + " [label=\"" + fmt.Sprintf("%v", node.value) + "\"]\n")
 	if err1 != nil { fmt.Println(err1); return}
