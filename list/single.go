@@ -1,6 +1,6 @@
 package list
 
-//NewSinglyLinkedList returns a new singly linked list
+//NewSinglyLinkedList returns an empty singly linked list
 func NewSinglyLinkedList[T any]() *SinglyLinkedList[T]{
 	list := &SinglyLinkedList[T]{
 		nil,

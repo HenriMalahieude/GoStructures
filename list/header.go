@@ -20,3 +20,16 @@ type SinglyLinkedList[T any] struct {
 	head *SingleNode[T]
 	tail *SingleNode[T]
 }
+
+//DoubleNode is a node for a doubly linked list
+type DoubleNode[T any] struct {
+	entry T
+	back *DoubleNode[T]
+	next *DoubleNode[T]
+}
+
+//DoublyLinkedList is a list where each node connects to its next and previous node
+type DoublyLinkedList[T any] struct{
+	head *DoubleNode[T]
+	tail *DoubleNode[T]
+}
