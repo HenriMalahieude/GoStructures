@@ -1,4 +1,4 @@
-package bst
+package tree
 
 //Tree is any BinarySearch, AVL, or Balance Tree
 type Tree[T any] interface {

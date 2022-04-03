@@ -1,4 +1,4 @@
-package bst
+package tree
 
 //NewBinarySearchTree Creates an empty Binary Search tree
 func NewBinarySearchTree[T any](compareFunction, equals func(T, T) bool) *BinaryTree[T] {
