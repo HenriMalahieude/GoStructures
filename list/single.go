@@ -93,3 +93,31 @@ func (l *SinglyLinkedList[T]) Search(lambda func(T) bool) *SingleNode[T]{
 
 	return nil
 }
+
+//Remove searches the list and then removes the first entry which satisfies the function provided
+func (l *SinglyLinkedList[T]) Remove(lambda func(T) bool){
+	if l.head == nil{return}
+
+	curNode := l.head
+	curPar := curNode
+	for curNode != nil && curNode.next != nil {
+		if lambda(curNode.entry) {
+			break;
+		}
+		curPar = curNode
+		curNode = curNode.next
+	}
+
+	if (curNode == nil){ //the 
+		return
+	}else if (curNode == l.head){
+		l.head = curNode.next
+	}else if (curNode == l.tail){
+		l.tail = curPar
+		curPar.next = nil
+	}else{
+		curPar.next = curNode.next
+	}
+
+	//NOTE: The garbage collection is nice, just feels weird to me, a cpp dev at heart
+}

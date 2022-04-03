@@ -5,7 +5,7 @@ type LinkedList[T any] interface {
 	PushFront(T)
 	PushBack(T)
 	Insert(pos int, value T)
-	Remove(T)
+	Remove(func(T) bool)
 	Search(func(T) bool) any
 }
 
