@@ -139,3 +139,19 @@ func (b *BinaryTree[T]) Remove(value T){
 		remPar.left = repNode
 	}
 }
+
+//Search returns the binary node containing the value given, nil otherwise
+func (b *BinaryTree[T]) Search(value T) *BinaryNode[T] {
+	curNode := b.root
+	for curNode != nil {
+		if b.equalizer(value, curNode.value) { return curNode }
+
+		if b.comparator(value, curNode.value) { //if true, go to the right
+			curNode = curNode.right
+		}else{
+			curNode = curNode.left
+		}
+	}
+
+	return nil
+}

@@ -4,7 +4,7 @@ package bst
 type Tree[T any] interface {
 	Insert(value T)
 	Remove(value T)
-	Search(value T)
+	Search(value T) any
 }
 
 //BinaryNode Simple value as defined by user with two children
