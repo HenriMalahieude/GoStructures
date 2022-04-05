@@ -37,5 +37,5 @@ type DoublyLinkedList[T any] struct {
 
 //CircularList where the tail points to the head
 type CircularList[T any] struct {
-	head *SingleNode[T]
+	head *DoubleNode[T]
 }
