@@ -10,10 +10,10 @@ Find "API Documentation" in headers for now. Please wait while I finish more str
 2. Linked Lists (Single/Double)
 3. Stacks
 4. Queues (non-priority)
+5. Circular Lists
 
 ## Planned Structures:
 1. Graphs
-2. Circular Lists
-3. Vectors (?)
-4. Balance Trees (?)
-5. Heaps (Min and Max)
+2. Vectors (?)
+3. Balance Trees (?)
+4. Heaps (Min and Max)
