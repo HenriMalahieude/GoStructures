@@ -1,5 +1,7 @@
 package list
 
+import "errors"
+
 //NewDoublyLinkedList returns an empty DoublyLinkedList
 func NewDoublyLinkedList[T any]() *DoublyLinkedList[T] {
 	return &DoublyLinkedList[T]{
@@ -52,12 +54,12 @@ func (d *DoublyLinkedList[T]) PushBack(value T){
 	d.tail = newNode
 }
 
-func (d *DoublyLinkedList[T]) Insert(pos int, value T){
+func (d *DoublyLinkedList[T]) Insert(pos uint, value T){
 	if (d.insertionSpecialCase(value)){
 		return
 	}
 
-	var curPos int = 0;
+	var curPos uint = 0;
 	var insertAfter *DoubleNode[T] = d.head;
 	for insertAfter != nil && insertAfter.next != nil && curPos < pos{
 		insertAfter = insertAfter.next;
@@ -77,6 +79,24 @@ func (d *DoublyLinkedList[T]) Insert(pos int, value T){
 
 		insertAfter.next = newNode
 	}
+}
+
+//Get returns the value of the 
+func (d *DoublyLinkedList[T]) Get(pos uint) (T, error){
+	var curPos uint = 0;
+	var node *DoubleNode[T] = d.head;
+	for node != nil && curPos < pos{
+		node = node.next;
+		curPos++;
+	}
+
+	if node == nil {
+		defVal := new(T)
+
+		return *defVal, errors.New("out of bounds access")
+	}
+
+	return node.entry, nil
 }
 
 func (d *DoublyLinkedList[T]) Remove(lambda func(T) bool) {
@@ -103,15 +123,17 @@ func (d *DoublyLinkedList[T]) Remove(lambda func(T) bool) {
 	}
 }
 
-func (d *DoublyLinkedList[T]) Search(lambda func(T) bool) any {
+func (d *DoublyLinkedList[T]) Search(lambda func(T) bool) (uint, error) {
+	var curPos uint = 0;
 	var curNode *DoubleNode[T] = d.head;
 	for curNode != nil && curNode.next != nil{
 		if lambda(curNode.entry) {
-			return curNode
+			return curPos, nil
 		}
 
+		curPos++;
 		curNode = curNode.next
 	}
 
-	return nil
+	return 0, errors.New("not found")
 }
