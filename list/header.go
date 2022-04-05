@@ -4,15 +4,16 @@ package list
 type LinkedList[T any] interface {
 	PushFront(T)
 	PushBack(T)
-	Insert(pos int, value T)
+	Insert(pos uint, value T)
+	Get(uint) (T, error)
 	Remove(func(T) bool)
-	Search(func(T) bool) any
+	Search(func(T) bool) (uint, error)
 }
 
 //SingleNode is a node for a singly linked list
 type SingleNode[T any] struct {
 	entry T
-	next *SingleNode[T]
+	next  *SingleNode[T]
 }
 
 //SinglyLinkedList is a list where each node only connects to the next
@@ -24,12 +25,17 @@ type SinglyLinkedList[T any] struct {
 //DoubleNode is a node for a doubly linked list
 type DoubleNode[T any] struct {
 	entry T
-	prev *DoubleNode[T]
-	next *DoubleNode[T]
+	prev  *DoubleNode[T]
+	next  *DoubleNode[T]
 }
 
 //DoublyLinkedList is a list where each node connects to its next and previous node
-type DoublyLinkedList[T any] struct{
+type DoublyLinkedList[T any] struct {
 	head *DoubleNode[T]
 	tail *DoubleNode[T]
+}
+
+//CircularList where the tail points to the head
+type CircularList[T any] struct {
+	head *SingleNode[T]
 }

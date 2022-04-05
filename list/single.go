@@ -1,5 +1,7 @@
 package list
 
+import "errors"
+
 //NewSinglyLinkedList returns an empty singly linked list
 func NewSinglyLinkedList[T any]() *SinglyLinkedList[T]{
 	list := &SinglyLinkedList[T]{
@@ -54,12 +56,12 @@ func (l *SinglyLinkedList[T]) PushBack(value T){
 }
 
 //Insert inserts the value into the list at position specified (or at end of list of too far)
-func (l *SinglyLinkedList[T]) Insert(pos int, value T){
+func (l *SinglyLinkedList[T]) Insert(pos uint, value T){
 	if (l.insertionSpecialCase(value)){
 		return
 	}
 
-	var curPos int = 0;
+	var curPos uint = 0;
 	var insertAfter *SingleNode[T] = l.head;
 	for insertAfter != nil && insertAfter.next != nil && curPos < pos{
 		insertAfter = insertAfter.next;
@@ -80,18 +82,39 @@ func (l *SinglyLinkedList[T]) Insert(pos int, value T){
 	}
 }
 
+//Get returns the entry saved at that position, or default value for element
+func (l *SinglyLinkedList[T]) Get(pos uint) (T, error){
+	var curPos uint = 0;
+	var node *SingleNode[T] = l.head;
+	for node != nil && curPos < pos{
+		node = node.next;
+		curPos++;
+	}
+
+	if node == nil {
+		defVal := new(T) //I know this will give me 
+	
+		return *defVal, errors.New("out of bounds access")
+	}
+	
+
+	return node.entry, nil
+}
+
 //Search searches the list and returns the first entry which satisfies the function provided, nil otherwise
-func (l *SinglyLinkedList[T]) Search(lambda func(T) bool) *SingleNode[T]{
+func (l *SinglyLinkedList[T]) Search(lambda func(T) bool) (uint, error){
+	var curPos uint = 0
 	var curNode *SingleNode[T] = l.head;
 	for curNode != nil && curNode.next != nil{
 		if lambda(curNode.entry) {
-			return curNode
+			return curPos, nil;
 		}
 
+		curPos++;
 		curNode = curNode.next
 	}
 
-	return nil
+	return 0, errors.New("not found")
 }
 
 //Remove searches the list and then removes the first entry which satisfies the function provided
