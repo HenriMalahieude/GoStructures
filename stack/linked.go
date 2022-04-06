@@ -25,7 +25,10 @@ func (ls *LinkedStack[T]) Push(value T){
 func (ls *LinkedStack[T]) Pop() T {
 	val := ls.top.entry
 	ls.top = ls.top.prev
-	ls.top.next = nil
+	if ls.top != nil {
+		ls.top.next = nil
+	}
+	
 
 	return val
 }
