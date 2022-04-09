@@ -141,10 +141,10 @@ func (b *BinaryTree[T]) Remove(value T){
 }
 
 //Search returns the binary node containing the value given, nil otherwise
-func (b *BinaryTree[T]) Search(value T) *BinaryNode[T] {
+func (b *BinaryTree[T]) Search(value T) bool {
 	curNode := b.root
 	for curNode != nil {
-		if b.equalizer(value, curNode.value) { return curNode }
+		if b.equalizer(value, curNode.value) { return true }
 
 		if b.comparator(value, curNode.value) { //if true, go to the right
 			curNode = curNode.right
@@ -153,5 +153,5 @@ func (b *BinaryTree[T]) Search(value T) *BinaryNode[T] {
 		}
 	}
 
-	return nil
+	return false
 }
