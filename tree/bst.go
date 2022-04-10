@@ -77,7 +77,7 @@ func (b *BinaryTree[T]) Remove(value T){
 	var repNode *BinaryNode[T] = remNode //replacement node
 	var repSide bool = remSide //the side it's on
 
-	if repNode.right == nil { //right child doesn't exist
+	if repNode.right == nil && repNode.left != nil { //right child doesn't exist
 		//fmt.Println("Looking for replacement on left side")
 		repPar = repNode
 		repNode = repNode.left
@@ -89,7 +89,7 @@ func (b *BinaryTree[T]) Remove(value T){
 			repNode = repNode.right
 			repSide = true
 		}
-	}else { //left child doesn't exist
+	}else if repNode.left == nil && repNode.right != nil{ //left child doesn't exist
 		//fmt.Println("Looking for replacement on right side")
 		repPar = repNode
 		repNode = repNode.right
@@ -111,32 +111,40 @@ func (b *BinaryTree[T]) Remove(value T){
 	fmt.Println(repNode.value, repNode.left == nil, repNode.right == nil)*/
 	
 	//We have found the replacement and now will switch em out
-	if (repNode.right != nil || repNode.left != nil){
-		b.Remove(repNode.value)
-	}else{ //that means that replacement node has no children, and we can remove the "leaf" node from the tree
-		if repSide {
-			repPar.right = nil
-		}else{
-			repPar.left = nil
+	if repNode != nil{
+		if (repNode.right != nil || repNode.left != nil) && !b.equalizer(repNode.value, value){
+			b.Remove(repNode.value)
+		}else{ //that means that replacement node has no children, and we can remove the "leaf" node from the tree
+			if repSide {
+				repPar.right = nil
+			}else{
+				repPar.left = nil
+			}
 		}
-	}
+		
+		repNode.right = remNode.right
+		repNode.left = remNode.left
 	
-	repNode.right = remNode.right
-	repNode.left = remNode.left
-
-	if repNode == remNode { //if there is no good replacement (because of no children)
-		if remSide {
-			remPar.right = nil
-		}else{
-			remPar.left = nil
+		if repNode == remNode { //if there is no good replacement (because of no children)
+			if remSide {
+				remPar.right = nil
+			}else{
+				remPar.left = nil
+			}
+			return
 		}
-		return
-	}
-
-	if remSide {
-		remPar.right = repNode
+	
+		if remNode != b.root {
+			if remSide {
+				remPar.right = repNode
+			}else{
+				remPar.left = repNode
+			}
+		}else{
+			b.root = repNode
+		}
 	}else{
-		remPar.left = repNode
+		panic("Replacement Node was nil?")
 	}
 }
 
