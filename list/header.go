@@ -8,6 +8,7 @@ type LinkedList[T any] interface {
 	Get(uint) (T, error)
 	Remove(func(T) bool)
 	Search(func(T) bool) (uint, error)
+	Empty() bool
 }
 
 //SingleNode is a node for a singly linked list

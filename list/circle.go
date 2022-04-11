@@ -128,3 +128,7 @@ func (c *CircularList[T]) Search(lambda func(T) bool) (uint, error){
 
 	return curPos, nil
 }
+
+func (c *CircularList[T]) Empty() bool {
+	return c.head == nil
+}

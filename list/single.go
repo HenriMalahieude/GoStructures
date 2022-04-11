@@ -144,3 +144,7 @@ func (l *SinglyLinkedList[T]) Remove(lambda func(T) bool){
 
 	//NOTE: The garbage collection is nice, just feels weird to me, a cpp dev at heart
 }
+
+func (l *SinglyLinkedList[T]) Empty() bool {
+	return l.head == nil
+}

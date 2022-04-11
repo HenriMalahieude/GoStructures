@@ -137,3 +137,7 @@ func (d *DoublyLinkedList[T]) Search(lambda func(T) bool) (uint, error) {
 
 	return 0, errors.New("not found")
 }
+
+func (d *DoublyLinkedList[T]) Empty() bool {
+	return d.head == nil
+}
