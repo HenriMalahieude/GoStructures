@@ -5,6 +5,8 @@ Nothing more, nothing less.
 
 Find "API Documentation" in headers for now. Please wait while I finish more structures for proper documentation.
 
+## Status: ![Go Tests](https://github.com/HenriMalahieude/GoStructures/actions/workflows/go.yml/badge.svg)
+
 ## Completed Structures:
 1. Binary Search Tree
 2. Linked Lists (Single/Double)
