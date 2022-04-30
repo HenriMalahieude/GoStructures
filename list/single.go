@@ -118,7 +118,7 @@ func (l *SinglyLinkedList[T]) Search(lambda func(T) bool) (uint, error){
 }
 
 //Remove searches the list and then removes the first entry which satisfies the function provided
-func (l *SinglyLinkedList[T]) Remove(lambda func(T) bool){
+func (l *SinglyLinkedList[T]) RemoveFirst(lambda func(T) bool){
 	if l.head == nil{return}
 
 	curNode := l.head

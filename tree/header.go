@@ -15,7 +15,7 @@ type BinaryNode[T any] struct {
 	//name string
 }
 
-//BinaryTree Simple Binary Tree, must define the comparator function (must be true for right value), and equalizer function
+//BinaryTree Simple Binary Tree, must define the comparator function (must be true for larger value), and equalizer function
 type BinaryTree[T any] struct {
 	comparator func(T, T) bool
 	equalizer  func(T, T) bool

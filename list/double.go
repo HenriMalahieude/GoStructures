@@ -99,7 +99,7 @@ func (d *DoublyLinkedList[T]) Get(pos uint) (T, error){
 	return node.entry, nil
 }
 
-func (d *DoublyLinkedList[T]) Remove(lambda func(T) bool) {
+func (d *DoublyLinkedList[T]) RemoveFirst(lambda func(T) bool) {
 	if d.head == nil{return}
 
 	curNode := d.head

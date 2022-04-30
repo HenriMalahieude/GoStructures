@@ -6,7 +6,7 @@ type LinkedList[T any] interface {
 	PushBack(T)
 	Insert(pos uint, value T)
 	Get(uint) (T, error)
-	Remove(func(T) bool)
+	RemoveFirst(func(T) bool)
 	Search(func(T) bool) (uint, error)
 	Empty() bool
 }
