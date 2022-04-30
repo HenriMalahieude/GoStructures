@@ -96,7 +96,7 @@ func (c *CircularList[T]) Get(pos uint) (T, error){
 	return node.entry, nil
 }
 
-func (c *CircularList[T]) Remove(lambda func(T) bool){
+func (c *CircularList[T]) RemoveFirst(lambda func(T) bool){
 	if c.head == nil{return}
 
 	remHead := true
@@ -115,15 +115,20 @@ func (c *CircularList[T]) Remove(lambda func(T) bool){
 
 	if (curNode == c.head && !remHead){ //the
 		return
+	}else if remHead{
+		c.head = curNode.next;
 	}
 
-	curNode.prev.next = curNode.next	
+	curNode.prev.next = curNode.next
+	curNode.next.prev = curNode.prev
+	//delete curNode;
 }
 
 func (c *CircularList[T]) Search(lambda func(T) bool) (uint, error){
 	isHead := true
 	var curPos uint = 0
 	curNode := c.head
+
 	if !lambda(curNode.entry){
 		isHead = false
 		curNode = curNode.next
