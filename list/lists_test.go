@@ -98,10 +98,10 @@ func tList(t *testing.T, listTest LinkedList[int], suite string) {
 		return v == 0;
 	})
 
-	fmt.Println("\n" + suite)
+	/*fmt.Println("\n" + suite)
 	for i := 0; i<7; i++ {
 		fmt.Println(listTest.Get(uint(i)))
-	}
+	}*/
 
 	if pos, err := listTest.Search(func(v int) bool {return v == 0}); pos != 0 && err == nil {
 		t.Fatal(suite + ": Search/RemoveFirst (Case1)")
