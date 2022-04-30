@@ -1,6 +1,8 @@
 package list
 
-import "errors"
+import (
+	"errors"
+)
 
 //NewCircularList returns a new empty circular list
 func NewCircularList[T any]() *CircularList[T] {
@@ -13,7 +15,9 @@ func NewCircularList[T any]() *CircularList[T] {
 func (c *CircularList[T]) PushFront(value T){
 	c.PushBack(value)
 	
-	c.head = c.head.prev
+	if c.head.prev != nil {
+		c.head = c.head.prev
+	}
 }
 
 //PushBack inserts an element behind the head
@@ -27,10 +31,23 @@ func (c *CircularList[T]) PushBack(value T){
 
 	newNode := new(DoubleNode[T])
 	newNode.entry = value
-	newNode.prev = c.head.prev
-	newNode.next = c.head
+	
+	if c.head.prev != nil {
+		newNode.prev = c.head.prev
+		newNode.next = c.head
 
-	c.head.prev.next = newNode
+		c.head.prev = newNode
+		
+		
+		newNode.prev.next = newNode
+
+		
+	}else{
+		newNode.prev = c.head
+		newNode.next = c.head
+		c.head.prev = newNode
+		c.head.next = newNode
+	}
 }
 
 func (c *CircularList[T]) Insert(pos uint, value T){
@@ -44,7 +61,7 @@ func (c *CircularList[T]) Insert(pos uint, value T){
 
 	var curPos uint = 0;
 	var insertAfter *DoubleNode[T] = c.head;
-	for curPos < pos{ //not worried about nil things
+	for (curPos+1) < pos{ //dont need to worry about nil things
 		insertAfter = insertAfter.next;
 		curPos++;
 	}
@@ -54,11 +71,10 @@ func (c *CircularList[T]) Insert(pos uint, value T){
 	}else if (insertAfter.next == c.head){
 		c.PushBack(value)
 	}else{
-		newNode := &DoubleNode[T]{
-			value,
-			insertAfter,
-			insertAfter.next,
-		}
+		newNode := new(DoubleNode[T])
+		newNode.entry = value
+		newNode.prev = insertAfter
+		newNode.next = insertAfter.next
 
 		insertAfter.next = newNode
 	}
