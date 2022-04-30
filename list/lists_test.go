@@ -59,6 +59,11 @@ func tList(t *testing.T, listTest LinkedList[int], suite string) {
 
 	listTest.Insert(4, 5)
 
+	/*
+	fmt.Println("\n" + suite)
+	for i := 0; i<6; i++ {
+		fmt.Println(listTest.Get(uint(i)))
+	}*/
 
 	if item, err := listTest.Get(4); item != 5 || err != nil {
 		if err != nil {
@@ -78,7 +83,7 @@ func tList(t *testing.T, listTest LinkedList[int], suite string) {
 		t.Fatal(suite + ": Get/Insert (Case3)\nExpected 6, got " + fmt.Sprint(item))
 	}
 
-	listTest.Insert(4, 4)
+	listTest.Insert(4, 4)// List: 0, 1, 2, 3, 4, 5, 6,
 
 	if item, err := listTest.Get(4); item != 4 || err != nil {
 		if err != nil {
@@ -89,6 +94,34 @@ func tList(t *testing.T, listTest LinkedList[int], suite string) {
 	}
 
 	//Remove Cases
+	listTest.RemoveFirst(func(v int) bool{
+		return v == 0;
+	})
+
+	fmt.Println("\n" + suite)
+	for i := 0; i<7; i++ {
+		fmt.Println(listTest.Get(uint(i)))
+	}
+
+	if pos, err := listTest.Search(func(v int) bool {return v == 0}); pos != 0 && err == nil {
+		t.Fatal(suite + ": Search/RemoveFirst (Case1)")
+	}
+
+	listTest.RemoveFirst(func(v int) bool{
+		return v == 6;
+	})
+
+	if pos, err := listTest.Search(func(v int) bool {return v == 6}); pos != 0 && err == nil {
+		t.Fatal(suite + ": Search/RemoveFirst (Case2)")
+	}
+
+	listTest.RemoveFirst(func(v int) bool{
+		return v == 3;
+	})
+
+	if pos, err := listTest.Search(func(v int) bool {return v == 3}); pos != 0 && err == nil {
+		t.Fatal(suite + ": Search/RemoveFirst (Case3)")
+	}
 
 	//Search Cases
 }
