@@ -61,7 +61,7 @@ func (d *DoublyLinkedList[T]) Insert(pos uint, value T){
 
 	var curPos uint = 0;
 	var insertAfter *DoubleNode[T] = d.head;
-	for insertAfter != nil && insertAfter.next != nil && curPos < pos{
+	for insertAfter != nil && insertAfter.next != nil && (curPos+1) < pos{
 		insertAfter = insertAfter.next;
 		curPos++;
 	}

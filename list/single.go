@@ -55,7 +55,7 @@ func (l *SinglyLinkedList[T]) PushBack(value T){
 	l.tail = newNode
 }
 
-//Insert inserts the value into the list at position specified (or at end of list of too far)
+//Insert inserts the value into the list at position specified (or at end of list if too far)
 func (l *SinglyLinkedList[T]) Insert(pos uint, value T){
 	if (l.insertionSpecialCase(value)){
 		return
@@ -63,7 +63,7 @@ func (l *SinglyLinkedList[T]) Insert(pos uint, value T){
 
 	var curPos uint = 0;
 	var insertAfter *SingleNode[T] = l.head;
-	for insertAfter != nil && insertAfter.next != nil && curPos < pos{
+	for insertAfter != nil && insertAfter.next != nil && (curPos+1) < pos{
 		insertAfter = insertAfter.next;
 		curPos++;
 	}
