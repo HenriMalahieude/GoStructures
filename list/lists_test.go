@@ -98,11 +98,6 @@ func tList(t *testing.T, listTest LinkedList[int], suite string) {
 		return v == 0;
 	})
 
-	/*fmt.Println("\n" + suite)
-	for i := 0; i<7; i++ {
-		fmt.Println(listTest.Get(uint(i)))
-	}*/
-
 	if pos, err := listTest.Search(func(v int) bool {return v == 0}); pos != 0 && err == nil {
 		t.Fatal(suite + ": Search/RemoveFirst (Case1)")
 	}
@@ -123,7 +118,25 @@ func tList(t *testing.T, listTest LinkedList[int], suite string) {
 		t.Fatal(suite + ": Search/RemoveFirst (Case3)")
 	}
 
+	//List: 1, 2, 4, 5,
+
 	//Search Cases
+	if pos, err := listTest.Search(func(v int) bool {return v == 2}); pos != 1 || err != nil {
+		t.Fatal(suite + ": Search (Case1)\nExpected 1, got " + fmt.Sprint(pos) + " " + fmt.Sprint(err))
+	}
+
+	if pos, err := listTest.Search(func(v int) bool {return v == 1}); pos != 0 || err != nil {
+		t.Fatal(suite + ": Search (Case2)\nExpected 0, got " + fmt.Sprint(pos) + " " + fmt.Sprint(err))
+	}
+
+	/*fmt.Println("\n" + suite)
+	for i := 0; i<5; i++ {
+		fmt.Println(listTest.Get(uint(i)))
+	}*/
+
+	if pos, err := listTest.Search(func(v int) bool {return v == 5}); pos != 3 || err != nil {
+		t.Fatal(suite + ": Search (Case3)\nExpected 3, got " + fmt.Sprint(pos) + " " + fmt.Sprint(err))
+	}
 }
 
 func TestLists(t *testing.T){
