@@ -126,7 +126,7 @@ func (d *DoublyLinkedList[T]) RemoveFirst(lambda func(T) bool) {
 func (d *DoublyLinkedList[T]) Search(lambda func(T) bool) (uint, error) {
 	var curPos uint = 0;
 	var curNode *DoubleNode[T] = d.head;
-	for curNode != nil && curNode.next != nil{
+	for curNode != nil{
 		if lambda(curNode.entry) {
 			return curPos, nil
 		}

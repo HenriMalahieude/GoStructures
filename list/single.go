@@ -105,7 +105,7 @@ func (l *SinglyLinkedList[T]) Get(pos uint) (T, error){
 func (l *SinglyLinkedList[T]) Search(lambda func(T) bool) (uint, error){
 	var curPos uint = 0
 	var curNode *SingleNode[T] = l.head;
-	for curNode != nil && curNode.next != nil{
+	for curNode != nil {
 		if lambda(curNode.entry) {
 			return curPos, nil;
 		}
