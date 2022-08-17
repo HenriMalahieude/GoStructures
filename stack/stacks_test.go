@@ -3,9 +3,7 @@ package stack
 import "testing"
 
 //TestStack tests stack
-func TestLinkedStack(t *testing.T) {
-	tstack1 := NewLinkedStack[int]()
-
+func GlobalTest(tstack1 Stack[int], t *testing.T) {
 	if !tstack1.Empty() {
 		t.Fatal("Empty (Case1): Not Passed")
 	}
@@ -43,4 +41,14 @@ func TestLinkedStack(t *testing.T) {
 	if !tstack1.Empty() {
 		t.Fatal("Empty/Pop (Case1): Not Passed")
 	}
+}
+
+func TestLinkedStack(t *testing.T) {
+	tstack1 := NewLinkedStack[int]()
+	GlobalTest(tstack1, t)
+}
+
+func TestArrangedStacks(t *testing.T) {
+	tstack1 := NewArrangedStack[int]()
+	GlobalTest(tstack1, t)
 }
