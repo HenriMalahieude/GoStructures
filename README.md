@@ -8,14 +8,22 @@ Find "API Documentation" in headers for now. Please wait while I finish more str
 ## Status: ![Go Tests](https://github.com/HenriMalahieude/GoStructures/actions/workflows/go.yml/badge.svg)
 
 ## Completed Structures:
-1. Binary Search Tree
-2. Linked Lists (Single/Double)
+1. Trees
+    * Binary Search Trees
+        * Console Output
+        * Visualization (using Dotty by Graphviz)
+2. Linked Lists
+    * Single
+    * Double
+    * Circular
 3. Stacks
-4. Queues (non-priority)
-5. Circular Lists
+    * Linked List Based
+    * Array/Slice Based
+4. Queues
+    * Non-Priority Linked List Style
 
 ## Planned Structures:
 1. Graphs
-2. Vectors (?)
+2. ~~Vectors (?)~~
 3. Balance Trees (?)
 4. Heaps (Min and Max)
