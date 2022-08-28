@@ -12,31 +12,31 @@ type LinkedList[T any] interface {
 }
 
 //SingleNode is a node for a singly linked list
-type SingleNode[T any] struct {
+type singleNode[T any] struct {
 	entry T
-	next  *SingleNode[T]
+	next  *singleNode[T]
 }
 
 //SinglyLinkedList is a list where each node only connects to the next
 type SinglyLinkedList[T any] struct {
-	head *SingleNode[T]
-	tail *SingleNode[T]
+	head *singleNode[T]
+	tail *singleNode[T]
 }
 
 //DoubleNode is a node for a doubly linked list
-type DoubleNode[T any] struct {
+type doubleNode[T any] struct {
 	entry T
-	prev  *DoubleNode[T]
-	next  *DoubleNode[T]
+	prev  *doubleNode[T]
+	next  *doubleNode[T]
 }
 
 //DoublyLinkedList is a list where each node connects to its next and previous node
 type DoublyLinkedList[T any] struct {
-	head *DoubleNode[T]
-	tail *DoubleNode[T]
+	head *doubleNode[T]
+	tail *doubleNode[T]
 }
 
 //CircularList where the tail points to the head
 type CircularList[T any] struct {
-	head *DoubleNode[T]
+	head *doubleNode[T]
 }

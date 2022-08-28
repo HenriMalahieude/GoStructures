@@ -7,10 +7,10 @@ type Tree[T any] interface {
 	Search(value T) bool
 }
 
-//BinaryNode Simple value as defined by user with two children
-type BinaryNode[T any] struct {
+//binaryNode Simple value as defined by user with two children
+type binaryNode[T any] struct {
 	value       T
-	left, right *BinaryNode[T]
+	left, right *binaryNode[T]
 	id          int
 	//name string
 }
@@ -19,6 +19,6 @@ type BinaryNode[T any] struct {
 type BinaryTree[T any] struct {
 	comparator func(T, T) bool
 	equalizer  func(T, T) bool
-	root       *BinaryNode[T]
+	root       *binaryNode[T]
 	nextID     int
 }
