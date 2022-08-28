@@ -7,7 +7,6 @@ type Tree[T any] interface {
 	Search(value T) bool
 }
 
-//binaryNode Simple value as defined by user with two children
 type binaryNode[T any] struct {
 	value       T
 	left, right *binaryNode[T]

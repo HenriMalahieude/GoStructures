@@ -7,6 +7,7 @@ type LinkedList[T any] interface {
 	Insert(pos uint, value T)
 	Get(uint) (T, error)
 	RemoveFirst(func(T) bool)
+	//RemoveAll
 	Search(func(T) bool) (uint, error)
 	Empty() bool
 }

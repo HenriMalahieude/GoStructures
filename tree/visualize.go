@@ -7,7 +7,7 @@ import (
 	"os/exec"
 )
 
-// Visualize creates a dotty file and runs the dot program (please make sure to have GraphViz initialized). Note: Dotty mirrors the tree for some reason
+// Visualize creates a dotty file and runs the dot program (please make sure to have GraphViz initialized)
 func (b BinaryTree[T]) VisualizeDotty(fileName string) {
 	file, err := os.Create(fileName + ".dot")
 
